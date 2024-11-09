@@ -1,0 +1,218 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicción del Precio de una Casa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <header id="main-header"
+        class="bg-[#004072] top-0 w-full z-10 transition-colors duration-300 py-4 md:px-12 shadow-lg">
+        <nav id="header" class="w-full">
+            <div class="w-full container mx-auto flex flex-wrap items-center justify-between px-6 py-3">
+                <!-- Menú móvil -->
+                <label for="menu-toggle" class="cursor-pointer md:hidden block">
+                    <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 20 20">
+                        <title>Menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" id="pathResponsive"></path>
+                    </svg>
+                </label>
+                <input class="hidden" type="checkbox" id="menu-toggle" />
+
+                <!-- Menú de navegación -->
+                <div class="hidden md:flex md:items-center md:w-auto" id="menu">
+                    <nav class="text-white">
+                        <ul class="md:flex items-center justify-between pt-4 md:pt-0">
+                            <li>
+                                <a class="inline-block no-underline hover:bg-black/50 py-2 px-4 text-xl transition"
+                                    href="/inicio">
+                                    REGRESAR
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Logo -->
+                <div class="order-1 md:order-2">
+                    <a href="#" class="flex items-center">
+                        <img src="{% static 'logos/logoBlanco.png' %}"
+                            class="mr-3 md:h-[4.2rem] h-[3rem] bg-transparent" alt="Monaco" id="logoHeader" />
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto py-12">
+
+        <h1 class="flex justify-center px-[4%] pt-[4%] text-3xl font-bold text-[#004072]" id="Nosotros">
+            TUS SUEÑOS, REALIDAD
+        </h1>
+        <div class="flex items-center justify-center text-center pt-[1.5%] pb-[2%]">
+            <hr class="border-2 border-[#Fc3333] w-[10rem] h-3 bg-[#Fc3333]">
+        </div>
+
+        <div class="flex max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-xl mb-6 space-y-6">
+            <!-- Descripción mejorada -->
+            <p class="text-2xl font-medium text-gray-800 leading-relaxed">
+                En <span class="font-bold text-blue-600">Inmobiliaria Monaco</span>, utilizamos Inteligencia Artificial
+                para
+                ayudarte a predecir el precio del hogar de tus sueños de manera rápida y precisa. Completa el
+                formulario,
+                haz clic en <span class="font-semibold text-blue-600">PREDECIR</span> y recibe los resultados en
+                segundos.
+            </p>
+
+            <!-- Botón para abrir el modal -->
+            <div class="flex text-center justify-center items-center">
+                <button id="openModalBtn"
+                    class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-all duration-300">Mostrar
+                    Características</button>
+            </div>
+        </div>
+
+
+        <!-- Formulario de entrada -->
+        <form method="POST" class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-xl">
+            {% csrf_token %}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mb-4">
+                    <label for="longitude" class="block text-lg font-medium text-gray-700">Longitud</label>
+                    <input type="text" name="longitude" class="w-full p-3 border border-gray-300 rounded-lg" required
+                        placeholder="Ej. -118.2437">
+                </div>
+                <div class="mb-4">
+                    <label for="latitude" class="block text-lg font-medium text-gray-700">Latitud</label>
+                    <input type="text" name="latitude" class="w-full p-3 border border-gray-300 rounded-lg" required
+                        placeholder="Ej. 34.0522">
+                </div>
+                <div class="mb-4">
+                    <label for="housing_median_age" class="block text-lg font-medium text-gray-700">Edad Media de la
+                        Vivienda</label>
+                    <input type="text" name="housing_median_age" class="w-full p-3 border border-gray-300 rounded-lg"
+                        required placeholder="Ej. 30">
+                </div>
+                <div class="mb-4">
+                    <label for="total_rooms" class="block text-lg font-medium text-gray-700">Total de
+                        Habitaciones</label>
+                    <input type="text" name="total_rooms" class="w-full p-3 border border-gray-300 rounded-lg" required
+                        placeholder="Ej. 120">
+                </div>
+                <div class="mb-4">
+                    <label for="total_bedrooms" class="block text-lg font-medium text-gray-700">Total de
+                        Dormitorios</label>
+                    <input type="text" name="total_bedrooms" class="w-full p-3 border border-gray-300 rounded-lg"
+                        required placeholder="Ej. 40">
+                </div>
+                <div class="mb-4">
+                    <label for="population" class="block text-lg font-medium text-gray-700">Población</label>
+                    <input type="text" name="population" class="w-full p-3 border border-gray-300 rounded-lg" required
+                        placeholder="Ej. 5000">
+                </div>
+                <div class="mb-4">
+                    <label for="households" class="block text-lg font-medium text-gray-700">Total de Hogares</label>
+                    <input type="text" name="households" class="w-full p-3 border border-gray-300 rounded-lg" required
+                        placeholder="Ej. 1000">
+                </div>
+                <div class="mb-4">
+                    <label for="median_income" class="block text-lg font-medium text-gray-700">Ingreso Medio</label>
+                    <input type="text" name="median_income" class="w-full p-3 border border-gray-300 rounded-lg"
+                        required placeholder="Ej. 5.5">
+                </div>
+            </div>
+            <button type="submit"
+                class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-all duration-300 w-full">
+                Predecir
+            </button>
+        </form>
+
+        <!-- Resultado de la predicción -->
+        {% if resultado %}
+        <div class="mt-8 bg-green-100 p-6 rounded-lg text-center shadow-lg">
+            <h3 class="text-2xl font-semibold text-green-600">Precio Estimado: ${{ resultado|floatformat:2 }}</h3>
+        </div>
+        {% endif %}
+
+        <!-- Modal -->
+        <div id="dataModal"
+            class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center hidden z-50">
+            <div class="bg-white rounded-lg p-8 max-w-3xl w-full">
+                <h3 class="text-3xl font-semibold text-blue-600 mb-6 text-center">Características del Conjunto de Datos
+                </h3>
+                <div class="space-y-4">
+                    <p class="text-lg"><strong>Longitud:</strong> Coordenada geográfica en el eje X del distrito.</p>
+                    <p class="text-lg"><strong>Latitud:</strong> Coordenada geográfica en el eje Y del distrito.</p>
+                    <p class="text-lg"><strong>Edad Media de la Vivienda:</strong> Edad promedio de las viviendas (en
+                        años).</p>
+                    <p class="text-lg"><strong>Total de Habitaciones:</strong> Total de habitaciones en todas las
+                        viviendas.</p>
+                    <p class="text-lg"><strong>Total de Dormitorios:</strong> Total de dormitorios en todas las
+                        viviendas.</p>
+                    <p class="text-lg"><strong>Población:</strong> Población total del distrito.</p>
+                    <p class="text-lg"><strong>Total de Hogares:</strong> Número de hogares en el distrito.</p>
+                    <p class="text-lg"><strong>Ingreso Medio:</strong> Ingreso medio en decenas de miles de dólares.</p>
+                </div>
+                <div class="flex justify-center mt-8">
+                    <button id="closeModalBtn"
+                        class="bg-red-600 hover:bg-red-700 text-white py-2 px-6 rounded-full transition">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Modal
+        document.getElementById('openModalBtn').addEventListener('click', function () {
+            document.getElementById('dataModal').classList.remove('hidden');
+        });
+
+        document.getElementById('closeModalBtn').addEventListener('click', function () {
+            document.getElementById('dataModal').classList.add('hidden');
+        });
+    </script>
+
+    <footer class="bg-[#004072] shadow mt-8 text-center">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                    <img src="{% static 'logos/logoBlanco.png' %}" class="mr-3 md:h-[3.2rem] h-[2rem] bg-transparent"
+                        alt="Monaco" id="logoHeader" />
+                </a>
+                <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0">
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Sobre Nosotros</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Política</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
+            <span class="block text-sm text-white sm:text-center">© 2024 <a href="#"
+                    class="hover:underline">Monaco™</a>. All
+                Rights
+                Reserved.</span>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
