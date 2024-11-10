@@ -32,7 +32,7 @@
                         <ul class="md:flex items-center justify-between pt-4 md:pt-0">
                             <li>
                                 <a class="inline-block no-underline hover:bg-black/50 py-2 px-4 text-xl transition"
-                                    href="/inicio">
+                                    href="/">
                                     REGRESAR
                                 </a>
                             </li>
@@ -83,57 +83,58 @@
         <!-- Formulario de entrada -->
         <form method="POST" class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-xl">
             {% csrf_token %}
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="mb-4">
+                <div class="mb-4"> {% comment %} Longitud {% endcomment %}
                     <label for="longitude" class="block text-lg font-medium text-gray-700">Longitud</label>
                     <input type="text" name="longitude" class="w-full p-3 border border-gray-300 rounded-lg" required
                         placeholder="Ej. -118.2437">
                 </div>
-                <div class="mb-4">
+                <div class="mb-4"> {% comment %} Latitud {% endcomment %}
                     <label for="latitude" class="block text-lg font-medium text-gray-700">Latitud</label>
                     <input type="text" name="latitude" class="w-full p-3 border border-gray-300 rounded-lg" required
                         placeholder="Ej. 34.0522">
                 </div>
-                <div class="mb-4">
+                <div class="mb-4"> {% comment %} Edad Media {% endcomment %}
                     <label for="housing_median_age" class="block text-lg font-medium text-gray-700">Edad Media de la
                         Vivienda</label>
                     <input type="text" name="housing_median_age" class="w-full p-3 border border-gray-300 rounded-lg"
                         required placeholder="Ej. 30">
                 </div>
-                <div class="mb-4">
+                <div class="mb-4"> {% comment %} Total Habitaciones {% endcomment %}
                     <label for="total_rooms" class="block text-lg font-medium text-gray-700">Total de
                         Habitaciones</label>
                     <input type="text" name="total_rooms" class="w-full p-3 border border-gray-300 rounded-lg" required
                         placeholder="Ej. 120">
                 </div>
-                <div class="mb-4">
+                <div class="mb-4"> {% comment %} Total dormitorios {% endcomment %}
                     <label for="total_bedrooms" class="block text-lg font-medium text-gray-700">Total de
                         Dormitorios</label>
                     <input type="text" name="total_bedrooms" class="w-full p-3 border border-gray-300 rounded-lg"
                         required placeholder="Ej. 40">
                 </div>
-                <div class="mb-4">
+                <div class="mb-4"> {% comment %} Poblacion {% endcomment %}
                     <label for="population" class="block text-lg font-medium text-gray-700">Población</label>
                     <input type="text" name="population" class="w-full p-3 border border-gray-300 rounded-lg" required
                         placeholder="Ej. 5000">
                 </div>
-                <div class="mb-4">
+                <div class="mb-4"> {% comment %} Total de hogares {% endcomment %}
                     <label for="households" class="block text-lg font-medium text-gray-700">Total de Hogares</label>
                     <input type="text" name="households" class="w-full p-3 border border-gray-300 rounded-lg" required
                         placeholder="Ej. 1000">
                 </div>
-                <div class="mb-4">
+                <div class="mb-4"> {% comment %} Ingreso Medio {% endcomment %}
                     <label for="median_income" class="block text-lg font-medium text-gray-700">Ingreso Medio</label>
                     <input type="text" name="median_income" class="w-full p-3 border border-gray-300 rounded-lg"
                         required placeholder="Ej. 5.5">
                 </div>
             </div>
-            <button type="submit"
-                class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-all duration-300 w-full">
+            <button 
+            type="submit" 
+            class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-all duration-300 w-full">
                 Predecir
             </button>
         </form>
+        
 
         <!-- Resultado de la predicción -->
         {% if resultado %}
